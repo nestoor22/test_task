@@ -112,8 +112,10 @@ class GitHubSearchCrawler:
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Crawler input')
-    parser.add_argument('-d', '--details', help='Crawler input details (JSON format)', required=True)
+    parser = argparse.ArgumentParser(description="Crawler input")
+    parser.add_argument(
+        "-d", "--details", help="Crawler input details (JSON format)", required=True
+    )
     args = parser.parse_args()
 
     try:
@@ -123,5 +125,3 @@ if __name__ == "__main__":
         print(results)
     except ValueError as error:
         logger.error(f"Input details are in incorrect format - {error}")
-        exit()
-
