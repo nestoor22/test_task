@@ -1,9 +1,9 @@
 from unittest import TestCase, mock
 
 import requests
+from bs4 import BeautifulSoup
 
 from .crawler import GitHubSearchCrawler
-from bs4 import BeautifulSoup
 
 
 MOCK_RESULT_ITEM = """
@@ -154,7 +154,7 @@ class TestGitHubCrawler(TestCase):
     @mock.patch(
         "crawler.crawler.GitHubSearchCrawler.http_get",
         side_effect=[
-            MockResponse(content=MOCK_HTML_AUTHOR_BLOCK+MOCK_HTML_LANGUAGES_BLOCK),
+            MockResponse(content=MOCK_HTML_AUTHOR_BLOCK + MOCK_HTML_LANGUAGES_BLOCK),
         ],
     )
     def test_additional_extraction(self, mock_http_get):
