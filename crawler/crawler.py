@@ -22,9 +22,10 @@ class GitHubSearchCrawler:
     GIT_HUB_URL = "https://github.com/"
 
     def __init__(self, crawl_details: dict):
+        # TODO: add crawl details validation
         self.crawl_details = crawl_details
 
-    def crawl(self):
+    def crawl(self) -> Optional[list]:
         response = self.http_get(
             path=urljoin(self.GIT_HUB_URL, "search"),
             params={
@@ -89,7 +90,7 @@ class GitHubSearchCrawler:
             logger.error(f"{path} - GET request failed: {error}")
 
     @property
-    def proxies(self):
+    def proxies(self) -> dict:
         proxy_url = random.choice(self.crawl_details["proxies"])
         return {"http": proxy_url, "https": proxy_url}
 
@@ -99,7 +100,7 @@ class GitHubSearchCrawler:
         return owner_block.get_text().strip() if owner_block else ""
 
     @staticmethod
-    def get_languages_stats(html_parser: BeautifulSoup):
+    def get_languages_stats(html_parser: BeautifulSoup) -> dict:
         language_stats_info = {}
         language_stats_blocks = html_parser.find_all(
             "a", attrs={"data-ga-click": re.compile(r".*language stats.*")}
