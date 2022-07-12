@@ -96,7 +96,7 @@ class GitHubSearchCrawler:
     @staticmethod
     def get_owner_info(html_parser: BeautifulSoup) -> str:
         owner_block = html_parser.find("span", attrs={"class": "author"})
-        return owner_block.get_text() if owner_block else ""
+        return owner_block.get_text().strip() if owner_block else ""
 
     @staticmethod
     def get_languages_stats(html_parser: BeautifulSoup):
